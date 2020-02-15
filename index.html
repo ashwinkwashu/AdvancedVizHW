@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Patterns at GAStech</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+    <script src="https://d3js.org/d3-timer.v1.min.js"></script>
+    <script src="http://colorbrewer2.org/export/colorbrewer.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div id="timepopup" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="row align-items-center">
+                    <div class="col-sm-2"><p id="value-time" style="float:left">Days Range: 01/06 - 01/21</p></div>
+                    <div class="col-sm"><div id="slider-time"></div></div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-sm-2"><p id="value-time-start" style="float:left">Start Time: 07 AM</p></div>
+                    <div class="col-sm"><div id="slider-time-start"></div></div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-sm-2"><p id="value-time-stop" style="float:left">End Time: 05 PM</p></div>
+                    <div class="col-sm"><div id="slider-time-stop"></div></div>
+                </div>
+            </div>
+        </div>
+        <div id="mySidebar" class="sidebar">
+            <div id="people"></div>
+        </div>
+        <div id="main">
+            <div class="header">
+                <div id="time_controls">
+                    <button id="emp" class="false">☰ Select Employees</button>
+                    <button id="start">Start</button>
+                    <button id="stop">Stop</button>
+                    <button id="custtime">Customize Time Interval</button>
+                    <button id="reload">Static Update</button>
+                    <button id="clear">Clear Map</button>
+                    <a href=index2.html>
+                        <button id="network">Network View</button>
+                    </a>
+                    <p id="time_stamp" style="float:right"></p>
+                </div>
+            </div>
+            <div id='map'></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col" id="output">
+                        <h3>Live transaction data from the visualization</h3>
+                    </div>
+                    <div class="col" id="history">
+                        <h3>Click on a place to view location history</h3>
+                    </div>
+                    <div class="col" id="credit_history">
+                        <h3>Click on a place to view credit card and loyalty history</h3>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src='src/map.js'> </script>
+</body>
+</html>

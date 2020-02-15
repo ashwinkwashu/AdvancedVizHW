@@ -1,0 +1,217 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,700);
+
+div.tooltip {	
+    position: absolute;			
+    text-align: center;							
+    padding: 2px;						
+    background: whitesmoke;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;
+    font: 1.2em/1.2 'Noto Sans', sans-serif;
+    font-size: 12px;
+}
+
+.header {
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: inline-block;
+    background: #ACC1AD;
+    color: white;
+    font: 1.2em/1.2 'Noto Sans', sans-serif;
+    font-size: 16px;
+}
+
+body {
+    background-color: white;
+    font: 1.2em/1.2 'Noto Sans', sans-serif;
+    margin: 0px;
+    overflow-x: hidden;
+}
+
+button{
+    font: 1.2em/1.2 'Noto Sans', sans-serif;
+    font-size: 10pt;
+}
+
+#people{
+    font-size: 10pt;
+}
+
+#abila_map{
+    width: 80.7%;
+}
+
+.contain {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font: 1.2em/1.2 'Noto Sans', sans-serif;
+}
+
+.contain input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: white;
+}
+
+.contain:hover input ~ .checkmark {
+    background-color: #eee;
+}
+
+.contain input:checked ~ .checkmark {
+    background-color: #ACC1AD;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.contain input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.contain .checkmark:after {
+    left: 8px;
+    top: 4px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    bottom: 0;
+    background-color: #f0f4f1;
+    overflow-y: scroll;
+    transition: 0.5s;
+    padding-top: 60px;
+    /* margin-top: 50px; */
+    min-height: 0 !important; /* added */
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar div {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 10px;
+    color: #818181;
+    display: block;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+#emp, #start, #stop, #custtime, #reload, #clear, #network{
+    font-size: 15px;
+    cursor: pointer;
+    background-color: #ACC1AD;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    outline: 0;
+}
+
+.header p{
+    padding-right: 50px;
+}
+
+#value-time, #value-time-start, #value-time-stop{
+    font-size: 15px;
+    padding-right: 50px;
+    color: #818181;
+}
+  
+#main {
+    transition: margin-left .5s;
+    padding: 0px;
+    margin: 0px;
+}
+
+#output, #history, #credit_history{
+    font-size: 15px;
+    padding-left: 20px;
+    color: #818181;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+  
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
