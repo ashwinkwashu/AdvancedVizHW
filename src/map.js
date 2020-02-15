@@ -339,7 +339,7 @@ btn.onclick = function() {
 }
 
 span.onclick = function() {
-    d3.select("#People").selectAll('circle').remove();
+    // d3.select("#People").selectAll('circle').remove();
     if (changetime){
         var time = d3.timeFormat('%H:%M');
         newstarttime = Date.parse(('1/'.concat(new Date(daterange[0]).getDate()).concat('/2014')) + ' ' + time(new Date(time_start)));
@@ -349,11 +349,11 @@ span.onclick = function() {
     }
     modal.style.display = "none";
     changetime = false;
-    start();
+    // start();
 }
 
 window.onclick = function(event) {
-    d3.select("#People").selectAll('circle').remove();
+    // d3.select("#People").selectAll('circle').remove();
     if (event.target == modal) {
         if (changetime){
             var time = d3.timeFormat('%H:%M');
@@ -363,7 +363,7 @@ window.onclick = function(event) {
             changetime = false; 
         }
         modal.style.display = "none";
-        start();
+        // start();
     }
 }
 
@@ -519,10 +519,10 @@ function plot_locations(){
             //onclick print out location
             .on('click', function(d){
                 const cur_location = d.location;
-                console.log(d.location);
+                // console.log(d.location);
                 d3.json('data/gps_sort_place.json')
                 .then(function (data){
-                    console.log(data[d.location]);
+                    // console.log(data[d.location]);
                     const div = document.getElementById("history");
                     div.innerHTML = '';
                     //header for new place
@@ -537,9 +537,11 @@ function plot_locations(){
                         current_person_id = parseInt(person_id)-1;
                         for(var n=0; n<checked_people.length;n++){
                             if (parseInt(current_person_id) == parseInt(checked_people[n])){
-                                newParagraph.innerText= data[d.location]["history"][i].time +" Name: "+ names[current_person_id] + " ID: " + data[d.location]["history"][i].id;
-                                div.appendChild(newParagraph);
-
+                                ptime = Date.parse(data[d.location]["history"][i].time)
+                                if (ptime > newstarttime && ptime < newstoptime){
+                                    newParagraph.innerText= data[d.location]["history"][i].time +" Name: "+ names[current_person_id] + " ID: " + data[d.location]["history"][i].id;
+                                    div.appendChild(newParagraph);
+                                }
                             }
                         }
 
@@ -573,10 +575,12 @@ function plot_locations(){
                             const cur_name = data[current_key][i][2] + " " + data[current_key][i][3];
                             //loop through poi
                             if (poi_name == cur_name){
-                                let newParagraph  = document.createElement('p');
-                                newParagraph.innerText= cur_name + " $" + data[current_key][i][1] + " Time: " + data[current_key][i][4] + " Type: " + data[current_key][i][5];
-                                cc_div.appendChild(newParagraph);
-
+                                ptime = Date.parse(data[current_key][i][4])
+                                if (ptime > newstarttime && ptime < newstoptime){
+                                    let newParagraph  = document.createElement('p');
+                                    newParagraph.innerText= cur_name + " $" + data[current_key][i][1] + " Time: " + data[current_key][i][4] + " Type: " + data[current_key][i][5];
+                                    cc_div.appendChild(newParagraph);
+                                }
                             }
 
                         }
