@@ -7,7 +7,7 @@ var selectall = false;
 var daterange = [new Date('01/06/2014'), new Date("1/21/2014")];
 var dateformat = d3.timeFormat('%A %m/%d %I:%M:%S %p');
 var hourformat = d3.timeFormat('%I %p');
-var time_start = new Date('01/06/2014 00:00');
+var time_start = new Date('01/06/2014 07:00');
 var time_end = new Date('01/06/2014 17:00');
 
 // on click, console will print x,y coordinates of mouse's location
@@ -123,7 +123,7 @@ var starttime = Date.parse("1/6/2014  6:28:01 AM");
 var stoptime = new Date(starttime + 3600*1000*24*15);
 var curtime = starttime;
 var newstarttime = starttime;
-var newstoptime = stoptime;
+var newstoptime = Date.parse(stoptime);
 var timestep = 20000;
 
 var timebasic = timestep;
@@ -138,7 +138,7 @@ document.addEventListener('keydown', (event) => {
     pressedKey=event.key;
     if(keyName=='ArrowRight'){ forward_fn();}
     if(keyName=='ArrowLeft') { reverse_fn();}
-    if(keyName==' ')         { pause_fn();  }
+    // if(keyName=='s')         { pause_fn();  }
   });
 
 // -------------------Functions for controlling time-------------------------
@@ -188,17 +188,26 @@ function stop(){
 }
 
 function start(){
+    console.log("ULULALALA")
     if (curtime == newstarttime){
         d3.select("#People").selectAll('circle').remove();
+        // latest = []; 
+        
     }
     timerOn = true;
     var t = d3.interval(function(elapsed) {
         // console.log(elapsed);
         // increment time
+        if(timestep==0){
+            timestep = timebasic;
+        }
         curtime = curtime + timestep;
+
         // console.log(new Date(curtime));
         //making timer loop over 15 days.
+        console.log(curtime)
         if (curtime > newstoptime){
+            console.log("OOPS")
                 curtime = newstarttime;
                 d3.select("#People").selectAll('circle').remove();
         }
@@ -214,6 +223,7 @@ function start(){
 
         //add to index.html
         var datetime = new Date(curtime);
+        console.log(datetime)
         document.getElementById("time_stamp").innerHTML = dateformat(datetime);
         if (timerOn == false) t.stop();
       }, 40);
@@ -914,10 +924,14 @@ function update_paths_static(){
     stop();
     d3.select("#People").selectAll('circle').remove();
     curtime = newstoptime;
+    console.log(curtime)
+    var datetime = new Date(curtime);
+    document.getElementById("time_stamp").innerHTML = dateformat(datetime);
     svg.select('#People').selectAll().remove();
     for( t = 0; t<checked_people.length; t++){
         console.log(checked_people[t])
         plot_person(checked_people[t])
     }
+
 }
 document.getElementById("time_stamp").innerHTML = dateformat(new Date(curtime));
