@@ -88,11 +88,11 @@ for place in output:
 
 for i in range(len(names)):
     for j in range(len(names)):
-        if i !=j and result[i][j] >4:
+        if i !=j and result[i][j] >0:
             a  =  {'source': i,'target':j,'value': result[i][j]}
             force_output['links'].append(a)
 
-with open('data/force_loyal_cc.json', 'w') as outfile:
+with open('data/force_loyal_cc2.json', 'w') as outfile:
     json.dump(force_output, outfile)
 
     # for credit in cc:

@@ -2,8 +2,6 @@ var width = 1600,
     height = 700,
     margin = 100;
 
-const names = ['','Lucas Alcazar', 'Lars Azada', 'Felix Balas', 'Ingrid Barranco', 'Isak Baza', 'Linnea Bergen', 'Isande Borrasca', 'Nils Calixto', 'Axel Calzas', 'Ada Campo-Corrente', 'Gustav Cazar', 'Hideki Cocinaro', 'Inga Ferro', 'Lidelse Dedos', 'Loreto Bodrogi', 'Isia Vann', 'Sven Flecha', 'Birgitta Frente', 'Vira Frente', 'Stenig Fusil', 'Hennie Osvaldo', 'Kanon Herrero', 'Varja Lagos', 'Minke Mies', 'Adra Nubarron', 'Marin Onda', 'Kare Orilla', 'Elsa Orilla', 'Bertrand Ovan', 'Felix Resumir', 'Sten Sanjorge Jr.', 'Orhan Strum', 'Brand Tempestad', 'Edvard Vann', 'Willem Vasco-Pais'];
-
 var x_center = width / 2,
     y_center = height / 2,
     radius = (height - 2 * margin) / 2;
@@ -17,9 +15,9 @@ var div = d3.select('body').append('div')
     .attr('class', 'tooltip')				
     .style('opacity', 0);
 
-var departments = ['Information Technology', 'Executive', 'Engineering', 'Security', 'Facilities'];
+var departments = ['Information Technology', 'Executive', 'Engineering', 'Security', 'Facilities', 'Administration'];
 
-var colorscale = ['#7076FF', '#AA6EF9', '#FF6490', '#FF8169', '#FFAE38']
+var colorscale = ['#7076FF', '#AA6EF9', '#FF6490', '#FF8169', '#FFAE38', '#FFDB00']
 
 // var color = d3.scale.category10();
 var color = d3.scale.ordinal().domain(departments)
@@ -69,15 +67,13 @@ function tooltip_out(d) {
 // d3.csv('data/car-assignments.csv', function(data){
 //   for(d in data){
 //     var car_id = +data[d].CarID;
-//     if(names.includes(data[d].FirstName + ' ' + data[d].LastName)){
-//       var p = {'name': data[d].FirstName + ' ' + data[d].LastName, "group": data[d].CurrentEmploymentType, "subgroup":data[d].CurrentEmploymentTitle};
-//       nodes.push(p);
-//     }
+//     var p = {'name': data[d].FirstName + ' ' + data[d].LastName, "group": data[d].CurrentEmploymentType, "subgroup":data[d].CurrentEmployment};
+//     nodes.push(p);
 //   }
-//   // console.log(JSON.stringify(nodes))  
+//   console.log(JSON.stringify(nodes))  
 // });
 
-d3.json("data/force2.json", function(error, graph) {
+d3.json("data/force_loyal_cc2.json", function(error, graph) {
   if (error) throw error;
   
   graph.nodes = graph.nodes.sort(function(a, b) { return d3.ascending(a.group, b.group); });
@@ -184,7 +180,7 @@ d3.json("data/force2.json", function(error, graph) {
 
       svg.selectAll('line')
         .transition().duration(1000)
-          .attr('x1', function(d){console.log(d.source); return d.source.x_resume; })
+          .attr('x1', function(d){ return d.source.x_resume; })
           .attr('y1', function(d){ return d.source.y_resume; })
           .attr('x2', function(d){ return d.target.x_resume; })
           .attr('y2', function(d){ return d.target.y_resume; });
