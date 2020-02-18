@@ -440,14 +440,15 @@ function draw_map(){
                 .attr("x2",function(data){return scale_x(data.x2);})
                 .attr("y1",function(data){return scale_y(data.y1);})
                 .attr("y2",function(data){return scale_y(data.y2);})
-                // .attr("stroke-linecap","round")
-                // .attr("stroke",function(data){return data.stroke;})
+            //     // .attr("stroke-linecap","round")
+            //     // .attr("stroke",function(data){return data.stroke;})
                 .attr("stroke","#DEB887")
-                //.attr("stroke-width",function(data){return +data.flag*5 + 1;})
+            //     //.attr("stroke-width",function(data){return +data.flag*5 + 1;})
                 .attr("stroke-width",1.5)
-                .style("opacity", 0.6);
+                // .style("opacity", 0.6);
         });
 }
+draw_map();
 
 function strip(location){
     var string = location.replace(/\s/g, '');
@@ -890,7 +891,6 @@ function plot_person(id){
 
 
 makesliders();
-draw_map();
 plot_locations();
 create_checkboxes(names);
 // document.getElementById("time_stamp").innerHTML = 'Current Time: ' + new Date(curtime).toString();
