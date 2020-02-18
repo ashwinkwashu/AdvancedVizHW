@@ -73,7 +73,7 @@ function tooltip_out(d) {
 //   console.log(JSON.stringify(nodes))  
 // });
 
-d3.json("data/force_loyal_cc2.json", function(error, graph) {
+d3.json("data/force_loyal_cc.json", function(error, graph) {
   if (error) throw error;
   
   graph.nodes = graph.nodes.sort(function(a, b) { return d3.ascending(a.group, b.group); });

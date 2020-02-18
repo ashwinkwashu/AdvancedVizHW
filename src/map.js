@@ -444,7 +444,7 @@ function draw_map(){
             //     // .attr("stroke",function(data){return data.stroke;})
                 .attr("stroke","#DEB887")
             //     //.attr("stroke-width",function(data){return +data.flag*5 + 1;})
-                .attr("stroke-width",1.5)
+                .attr("stroke-width", 0.5)
                 // .style("opacity", 0.6);
         });
 }
@@ -831,7 +831,7 @@ function plot_person(id){
                                 .append("circle").attr("id",name)
                                 .attr('cx', x)
                                 .attr('cy', y)
-                                .attr('r', rad*5)
+                                .attr('r', rad*3)
                                 .attr('fill', color(checked_people.indexOf(data.id)))
                                 .style('opacity', 0.6)
                                 .attr('time',time)
@@ -844,7 +844,7 @@ function plot_person(id){
                         else{
                             var rad = get_radius(curtime - Date.parse(data.time))
                             svg.select("#".concat(name.toString()))
-                                .attr('r', rad*5);
+                                .attr('r', rad*3);
                         }
                     }
                     
@@ -865,9 +865,9 @@ function plot_person(id){
                     .attr('d', lineFunc(points))
                     .attr('stroke',function(data){return color(checked_people.indexOf(latest[id].id))})
                     .attr('fill', 'none')
-                    .attr("stroke-width",5)
-                    .on("mouseover",function(data){d3.select(this).attr('stroke-width',10); return tooltip_in(names[id])})//Show the path id on hover					
-                    .on("mouseout", function(d){d3.select(this).attr('stroke-width',5); return tooltip_out(d)});
+                    .attr("stroke-width",0.5)
+                    .on("mouseover",function(data){d3.select(this).attr('stroke-width',5); return tooltip_in(names[id])})//Show the path id on hover					
+                    .on("mouseout", function(d){d3.select(this).attr('stroke-width',0.5); return tooltip_out(d)});
                     
                 var x = scale_x(latest[id].long);
                 var y = scale_y(latest[id].lat);
@@ -876,9 +876,9 @@ function plot_person(id){
                 svg.select("#P".concat(id.toString()))
                     .append("circle").attr("id","current".concat(id.toString()))
                     .attr('cx', x).attr('cy',y)
-                    .attr('r', 10).attr('fill',color(checked_people.indexOf(data.id)))
+                    .attr('r', 6).attr('fill',color(checked_people.indexOf(data.id)))
                     .on("mouseover",function(data){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',10); return tooltip_in(names[id])})//Show the path id on hover					
-                    .on("mouseout", function(d){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',5); return tooltip_out(d)});
+                    .on("mouseout", function(d){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',0.5); return tooltip_out(d)});
             }
         // }
         // );
