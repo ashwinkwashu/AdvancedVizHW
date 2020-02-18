@@ -444,7 +444,8 @@ function draw_map(){
                 // .attr("stroke",function(data){return data.stroke;})
                 .attr("stroke","#DEB887")
                 //.attr("stroke-width",function(data){return +data.flag*5 + 1;})
-                .attr("stroke-width",1.5);
+                .attr("stroke-width",1.5)
+                .style("opacity", 0.6);
         });
 }
 
@@ -494,7 +495,7 @@ function blip(location, id){
 
 
 function plot_locations(){
-    d3.csv('/data/locations.csv')
+    d3.csv('data/locations.csv')
         .then(function (data){
         svg.append('g').attr('id','POI')
             .selectAll('circle')
@@ -670,7 +671,7 @@ for(ii = 0; ii<36;ii++){
         weights[ii].push(0);
     }
 }
-console.log(weights)
+//console.log(weights)
  
 
 d3.json('data/gps_clean_condensed.json')
@@ -678,7 +679,7 @@ d3.json('data/gps_clean_condensed.json')
         dataBig = data;
         for(id in people_id){
             id = +id;
-            console.log(id)
+            //console.log(id)
             loc_data = dataBig[+id];
             var t;
             end_indices[id] = loc_data.length;
@@ -889,7 +890,7 @@ function plot_person(id){
 
 
 makesliders();
-// draw_map();
+draw_map();
 plot_locations();
 create_checkboxes(names);
 // document.getElementById("time_stamp").innerHTML = 'Current Time: ' + new Date(curtime).toString();
