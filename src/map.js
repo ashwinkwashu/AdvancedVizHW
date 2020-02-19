@@ -936,3 +936,4 @@ function update_paths_static(){
 
 }
 document.getElementById("time_stamp").innerHTML = dateformat(new Date(curtime));
+introJs().start();

@@ -8,7 +8,9 @@
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
     <script src="https://d3js.org/d3-timer.v1.min.js"></script>
     <script src="https://unpkg.com/d3-simple-slider"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.min.js" integrity="sha256-fOPHmaamqkHPv4QYGxkiSKm7O/3GAJ4554pQXYleoLo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/introjs.min.css" integrity="sha256-/oZ7h/Jkj6AfibN/zTWrCoba0L+QhP9Tf/ZSgyZJCnY=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
@@ -36,17 +38,17 @@
         <div id="main">
             <div class="header">
                 <div id="time_controls">
-                    <button id="emp" class="false">☰ Select Employees</button>
-                    <button id="start">Start</button>
+                    <button id="emp" class="false span6" data-step="1" data-intro="Click here to select your employees" data-position='right' data-scrollTo='tooltip'>☰ Select Employees</button>
+                    <button id="start" class="span6" data-step="2" data-intro="Once you have selected your employees, hit start." data-position='right' data-scrollTo='tooltip'>Start</button>
                     <button id="stop">Stop</button>
-                    <button id="custtime">Customize Time Interval</button>
-                    <button id="reload">Static Update</button>
+                    <button id="custtime" class="span6" data-step="3" data-intro="Click here to customize your time interval." data-position='right' data-scrollTo='tooltip'>Customize Time Interval</button>
+                    <button id="reload" class="span6" data-step="4" data-intro="Click here to display location history over the selected time interval without animation." data-position='right' data-scrollTo='tooltip'>Static Update</button>
                     <button id="clear">Clear Map</button>
-                    <a href=index2.html>
+                    <a href=index2.html ata-step="8" data-intro="Click to view network graph of location data" data-position='right' data-scrollTo='tooltip'>
                         <button id="network">Network View</button>
                     </a>
                     <a href=index3.html>
-                        <button id="network">Transaction Network View</button>
+                        <button id="network" ata-step="9" data-intro="Click to view network graph of credit card data" data-position='right' data-scrollTo='tooltip'>Transaction Network View</button>
                     </a>
                     <p id="time_stamp" style="float:right"></p>
                 </div>
@@ -54,16 +56,15 @@
             <div id='map'></div>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col" id="output">
+                    <div class="col span6" data-step="5" data-intro="Credit card data from selected people will appear here in real time." data-position='right' data-scrollTo='tooltip' id="output">
                         <h3>Live transaction data from the visualization</h3>
                     </div>
-                    <div class="col" id="history">
+                    <div class="col span6" data-step="6" data-intro="Click on a location to view if selected people have visited it" data-position='right' data-scrollTo='tooltip' id="history">
                         <h3>Click on a place to view location history</h3>
                     </div>
-                    <div class="col" id="credit_history">
+                    <div class="col span6" data-step="7" data-intro="Click on a location to view if selected people have spent money on it" data-position='right' data-scrollTo='tooltip' id="credit_history">
                         <h3>Click on a place to view credit card and loyalty history</h3>
                     </div>
-    
                 </div>
             </div>
         </div>
