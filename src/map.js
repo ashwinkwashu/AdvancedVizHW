@@ -978,8 +978,76 @@ function create_dropdown(){
 
 }
 //TODO: BARGRAPH
-function draw_bar(data){
-    console.log(data);
+function draw_bar(data_imported){
+    var output = []
+    var i = 0;
+    for(var key in data_imported) {
+        if(data_imported.hasOwnProperty(key)) {
+            output[i] = {"name":key,"frequency":data_imported[key]};
+            i +=1;
+        }
+    }
+    console.log(output);
+    var barwidth = 300;
+    var barheight = 300;
+
+    var xScale = d3.scaleBand()
+        .range([0, barwidth])
+        .padding([0.2]);
+
+    var yScale = d3.scaleLinear()
+        .range([barheight, 0]);
+
+    xScale.domain(output.map(function(d) { return d.name; }));
+    yScale.domain([0, d3.max(output, function(d) { return +d.frequency; })]);
+
+    var bar = svg.append('g').attr('id','bar')
+    bar.selectAll(".bar").data(output)
+        .enter().append('rect')
+        .attr('class', 'bar')
+        .attr('x', function(d) { return xScale(d.name); })
+        .attr('width', xScale.bandwidth())
+        .attr('y', function(d) { return yScale(+d.frequency); })
+        .attr('height', function(d) { return barheight - yScale(+d.frequency); });
+        
+    bar.append('g')
+        .attr('id', 'scale')
+        .attr('transform', 'translate(0,' + barheight + ')')
+        .call(d3.axisBottom(xScale));
+  
+    // add the y axis
+    bar.append('g')
+        .attr('id', 'scale')
+        .call(d3.axisLeft(yScale))
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("fill", "black") 
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Frequency");
+
+
+    // svg.append('g').attr('id','bar');
+    // svg.selectAll("bar")
+    // .data(output)
+    // .enter()
+    // .append("rect")
+    // .attr("class", "bar")
+    // .attr("x", function (d, i) {
+    //     for (i>0; i < data.length; i++) {
+    //         return i * 21;
+    //     }
+    // })
+    // .attr("y", function (d) {
+    //     return height - (d.val*10);
+    // })
+    // .attr("width", 20)
+    // .attr("height", function (d) {
+    //     return d.val * 10;
+    // });
+
+
 }
 
 function sel_place(){
