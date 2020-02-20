@@ -848,9 +848,9 @@ function plot_person(id){
                     .attr('d', lineFunc(points))
                     .attr('stroke',function(data){return color(checked_people.indexOf(latest[id].id))})
                     .attr('fill', 'none')
-                    .attr("stroke-width",0.5)
+                    .attr("stroke-width", 2)
                     .on("mouseover",function(data){d3.select(this).attr('stroke-width',5); return tooltip_in(names[id])})//Show the path id on hover					
-                    .on("mouseout", function(d){d3.select(this).attr('stroke-width',0.5); return tooltip_out(d)});
+                    .on("mouseout", function(d){d3.select(this).attr('stroke-width',2); return tooltip_out(d)});
                     
                 var x = scale_x(latest[id].long);
                 var y = scale_y(latest[id].lat);
@@ -861,7 +861,7 @@ function plot_person(id){
                     .attr('cx', x).attr('cy',y)
                     .attr('r', 6).attr('fill',color(checked_people.indexOf(data.id)))
                     .on("mouseover",function(data){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',10); return tooltip_in(names[id])})//Show the path id on hover					
-                    .on("mouseout", function(d){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',0.5); return tooltip_out(d)});
+                    .on("mouseout", function(d){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',2); return tooltip_out(d)});
             }
         // }
         // );
