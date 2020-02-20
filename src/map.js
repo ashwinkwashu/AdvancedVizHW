@@ -864,11 +864,21 @@ function plot_person(id){
                 
                 svg.selectAll("#current".concat(id.toString())).remove();
                 svg.select("#P".concat(id.toString()))
-                    .append("circle").attr("id","current".concat(id.toString()))
-                    .attr('cx', x).attr('cy',y)
-                    .attr('r', 6).attr('fill',color(checked_people.indexOf(data.id)))
+                    .append("image")
+                    .attr("id","current".concat(id.toString()))
+                    .attr("x",x-20)
+                    .attr("y",y-20)
+                    .attr("xlink:href", "../icons/marker.png")
+                    .attr('width', 40)
+                    .attr('height', 40)
                     .on("mouseover",function(data){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',10); return tooltip_in(names[id])})//Show the path id on hover					
-                    .on("mouseout", function(d){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',2); return tooltip_out(d)});
+                    .on("mouseout", function(d){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',2); return tooltip_out(d)});;
+                // svg.select("#P".concat(id.toString()))
+                //     .append("circle").attr("id","current".concat(id.toString()))
+                //     .attr('cx', x).attr('cy',y)
+                //     .attr('r', 6).attr('fill',color(checked_people.indexOf(data.id)))
+                //     .on("mouseover",function(data){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',10); return tooltip_in(names[id])})//Show the path id on hover					
+                //     .on("mouseout", function(d){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',2); return tooltip_out(d)});
             }
         // }
         // );
