@@ -575,7 +575,7 @@ function log_all_data(d){
                 })
                 d3.json('data/loyal_cc_combo.json')
                 .then(function (data){
-                    current_key  = null;
+                    current_key  = "Frank's Fuel";
                     //some error parsing. im not sure why
                     for (const [key, value] of Object.entries(data)) {
                         if (strip(cur_location) == strip(key)){
