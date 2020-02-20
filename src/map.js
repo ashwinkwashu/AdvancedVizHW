@@ -142,9 +142,13 @@ document.addEventListener('keydown', (event) => {
   });
 
 // -------------------Functions for controlling time-------------------------
+var speedratio = 1;
 function reverse_fn(){
-    if (timestep==0){ start();}
+    console.log(timestep, speedratio)
     timestep-=timebasic;
+    speedratio -=1;
+    console.log(timestep, speedratio)
+    if (timestep<0){ start();}
     if(timestep==0){stop();}
 }
 function pause_fn(){
@@ -160,8 +164,10 @@ function pause_fn(){
     }
 }
 function forward_fn(){
-    if (timestep==0){start();}
+    
     timestep+=timebasic;
+    speedratio +=1;
+    if (timestep>0){start();}
     if(timestep==0){stop();}
 }
 // ------------------------------------------------------------------
@@ -184,11 +190,18 @@ function control_nav() {
 // stop the timer
 function stop(){
     timerOn = false;
-    
+    var datetime = new Date(curtime);
+    document.getElementById("time_stamp").innerHTML = dateformat(datetime) +' '+ speedratio.toString()+'x';
+    timestep = 0;
+    speedratio = 0;    
 }
 
 function start(){
-    console.log("ULULALALA")
+    // if(timestep==0){
+    //     timestep = timebasic;
+    //     speedratio = 1;
+    // }
+    // console.log("ULULALALA")
     if (curtime == newstarttime){
         d3.select("#People").selectAll('circle').remove();
         // latest = []; 
@@ -198,16 +211,16 @@ function start(){
     var t = d3.interval(function(elapsed) {
         // console.log(elapsed);
         // increment time
-        if(timestep==0){
-            timestep = timebasic;
-        }
+        // if(timestep==0){
+        //     timestep = timebasic;
+        // }
         curtime = curtime + timestep;
 
         // console.log(new Date(curtime));
         //making timer loop over 15 days.
-        console.log(curtime)
+        // console.log(curtime)
         if (curtime > newstoptime){
-            console.log("OOPS")
+            // console.log("OOPS")
                 curtime = newstarttime;
                 d3.select("#People").selectAll('circle').remove();
         }
@@ -223,8 +236,8 @@ function start(){
 
         //add to index.html
         var datetime = new Date(curtime);
-        console.log(datetime)
-        document.getElementById("time_stamp").innerHTML = dateformat(datetime);
+        // console.log(datetime)
+        document.getElementById("time_stamp").innerHTML = dateformat(datetime) +' ('+ speedratio.toString()+'x)';
         if (timerOn == false) t.stop();
       }, 40);
 
