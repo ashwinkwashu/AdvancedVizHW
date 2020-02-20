@@ -542,8 +542,12 @@ function plot_locations(){
     });
 }
 //log cc data and loc data of selected people
+
+
 function log_all_data(d){
     const cur_location = d;
+    var cnt_dict = {};
+
                 // console.log(d.location);
                 d3.json('data/gps_sort_place.json')
                 .then(function (data){
@@ -573,6 +577,7 @@ function log_all_data(d){
 
                     }
                 })
+
                 d3.json('data/loyal_cc_combo.json')
                 .then(function (data){
                     current_key  = "Frank's Fuel";
@@ -592,7 +597,6 @@ function log_all_data(d){
                     header.innerText = cur_location;
                     cc_div.appendChild(header);
                     //loop through cc history and output people who have visited
-                    console.log(checked_people);
                     for (var i=0; i< data[current_key].length;i++){
                         for(var n=0; n<checked_people.length;n++){
                             const current_person_id = parseInt(checked_people[n]);
@@ -602,6 +606,11 @@ function log_all_data(d){
                             if (poi_name == cur_name){
                                 ptime = Date.parse(data[current_key][i][4])
                                 if (ptime > newstarttime && ptime < newstoptime){
+                                    if (cnt_dict[cur_name] == undefined){
+                                        cnt_dict[cur_name] = 1;
+                                    } else{
+                                        cnt_dict[cur_name] += 1;
+                                    }
                                     let newParagraph  = document.createElement('p');
                                     newParagraph.innerText= cur_name + " $" + data[current_key][i][1] + " Time: " + data[current_key][i][4] + " Type: " + data[current_key][i][5];
                                     cc_div.appendChild(newParagraph);
@@ -609,10 +618,8 @@ function log_all_data(d){
                             }
 
                         }
-
-
                     }
-             
+                    draw_bar(cnt_dict);
 
 
                 })
@@ -945,8 +952,10 @@ function create_dropdown(){
     });
 
 }
-
-
+//TODO: BARGRAPH
+function draw_bar(data){
+    console.log(data);
+}
 
 function sel_place(){
     var e = document.getElementById("mySelect");
