@@ -1,5 +1,5 @@
-var width = 1600,
-    height = 700,
+var width = 16000,
+    height = 9000,
     margin = 100;
 
 var x_center = width / 2,
@@ -24,8 +24,8 @@ var color = d3.scale.ordinal().domain(departments)
   .range(colorscale);
 
 var force = d3.layout.force()
-    .charge(-100)
-    .linkDistance(300)
+    .charge(200)
+    .linkDistance(5000)
     .size([width, height]);
 
 var x_scale = d3.scale.linear()
@@ -73,9 +73,13 @@ function tooltip_out(d) {
 //   console.log(JSON.stringify(nodes))  
 // });
 
+var low_thresh = -1;
+var high_thresh = 100000;
+var max_value = 0;
+
+
 d3.json("data/force_loyal_cc.json", function(error, graph) {
   if (error) throw error;
-  
   graph.nodes = graph.nodes.sort(function(a, b) { return d3.ascending(a.group, b.group); });
   n_elements = graph.nodes.length;
 
@@ -84,20 +88,28 @@ d3.json("data/force_loyal_cc.json", function(error, graph) {
       .links(graph.links)
       .start();
 
-  var max_value = d3.max(graph.links, function(d){ return d.value; });
+  max_value = d3.max(graph.links, function(d){ return d.value; });
 
   var link = svg.append('g').attr('class', 'links').selectAll('line')
       .data(graph.links)
     .enter().append('line')
-      .style('opacity', 0.8)
-      .style('stroke-width', function(d) { return 5 * d.value / max_value; })
-      .style('stroke-opacity', '0.6')
-      .attr('stroke', '#999');
+      // .style('opacity', 0.8)
+      .style('stroke-width', function(d) { return Math.max(50 * (d.value) / (max_value), 0); })
+      // .style('stroke-opacity', '0.6')
+      .attr('stroke', '#999')
+      .attr('value', function(d){ return d.value})
+      .on('mouseover',function(d){
+        // d3.select(this).attr('hover',1);
+        if(d.name != ''){
+          var val = d.value;
+          tooltip_in(val);
+        }
+      });
 
   var node = svg.append('g').attr('class', 'nodes').selectAll('circle')
       .data(graph.nodes)
     .enter().append('circle')
-      .attr('r', 10)
+      .attr('r', 100)
       .attr('name', function(d){ return d.name})
       .style('fill', function(d) { return color(d.group); })
       .attr('stroke', '#fff')
@@ -126,11 +138,11 @@ d3.json("data/force_loyal_cc.json", function(error, graph) {
             return '#999';
           }
         });
-        d3.select(this).attr('r', 15);
+        d3.select(this).attr('r', 150);
       })
       .on('mouseout', function(d){
         d3.select(this).attr('hover',0)
-        d3.select(this).attr('r', 10);
+        d3.select(this).attr('r', 100);
         d3.selectAll('line').attr('stroke', '#999')
         return tooltip_out(d);
       });
@@ -198,4 +210,38 @@ d3.json("data/force_loyal_cc.json", function(error, graph) {
 
   });
 
+});
+
+
+
+document.getElementById("lowerButton").addEventListener('click',function(){
+  low_thresh = +document.getElementById("thresh_low_input").value;
+  svg.selectAll('line').style('stroke-width', function(d){
+    var v = +d3.select(this).attr('value');
+    if(v<low_thresh){
+      v=0;
+    }
+    if(v>high_thresh){
+      v=0;
+    }
+    console.log(low_thresh, high_thresh);
+    return Math.max(50 * v / Math.min(max_value, high_thresh), 0);
+  })
+});
+
+document.getElementById("higherButton").addEventListener('click',function(){
+  high_thresh = +document.getElementById("thresh_high_input").value;
+  svg.selectAll('line').style('stroke-width', function(d){
+    var v = +d3.select(this).attr('value');
+    if(v<low_thresh){
+      v=0;
+    }
+    if(v>high_thresh){
+      v=0;
+    }
+    console.log(low_thresh, high_thresh);
+    console.log(v);
+    console.log(Math.max(50 * v / Math.min(max_value, high_thresh), 0))
+    return Math.max(50 * v / Math.min(max_value, high_thresh), 0);
+  })
 });
