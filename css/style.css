@@ -215,3 +215,10 @@ button{
     text-decoration: none;
     cursor: pointer;
 }
+
+/* make logged info scrollable */
+
+.info{
+    height: 440px;
+    overflow: auto;
+}

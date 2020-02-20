@@ -16,6 +16,8 @@ with open('data/locations.csv', newline='') as csvfile:
 with open('data/gps_clean_condensed.json') as f:
   data = json.load(f)
 
+#thousand foot radius for parking
+threshold = 0.005
 #loop for all locations/shops
 for loc in loc_list:
     #loop for all people
@@ -24,8 +26,9 @@ for loc in loc_list:
             #loop through gps data
             for point in data[str(i)]:
                 #print(point["long"],locations["Bean There Done That"]["long"])
-                if abs(round(float(point["long"]),7) -round(float(locations[loc]["long"]),7)) <0.000009:
-                    locations[loc]["history"].append(point)
+                if abs(round(float(point["long"]),7) -round(float(locations[loc]["long"]),7)) < threshold:
+                      if abs(round(float(point["lat"]),7) -round(float(locations[loc]["lat"]),7)) < threshold:
+                        locations[loc]["history"].append(point)
                     # print(point["long"],locations["Bean There Done That"]["long"])
         
 with open('data/gps_sort_place.json', 'w') as outfile:
