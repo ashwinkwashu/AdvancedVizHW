@@ -1,5 +1,5 @@
 var width = 1600,
-    height = 700,
+    height = 900,
     margin = 100;
 
 const names = ['','Lucas Alcazar', 'Lars Azada', 'Felix Balas', 'Ingrid Barranco', 'Isak Baza', 'Linnea Bergen', 'Isande Borrasca', 'Nils Calixto', 'Axel Calzas', 'Ada Campo-Corrente', 'Gustav Cazar', 'Hideki Cocinaro', 'Inga Ferro', 'Lidelse Dedos', 'Loreto Bodrogi', 'Isia Vann', 'Sven Flecha', 'Birgitta Frente', 'Vira Frente', 'Stenig Fusil', 'Hennie Osvaldo', 'Kanon Herrero', 'Varja Lagos', 'Minke Mies', 'Adra Nubarron', 'Marin Onda', 'Kare Orilla', 'Elsa Orilla', 'Bertrand Ovan', 'Felix Resumir', 'Sten Sanjorge Jr.', 'Orhan Strum', 'Brand Tempestad', 'Edvard Vann', 'Willem Vasco-Pais'];
@@ -26,8 +26,8 @@ var color = d3.scale.ordinal().domain(departments)
   .range(colorscale);
 
 var force = d3.layout.force()
-    .charge(-100)
-    .linkDistance(300)
+    .charge(20)
+    .linkDistance(500)
     .size([width, height]);
 
 var x_scale = d3.scale.linear()
@@ -77,7 +77,12 @@ function tooltip_out(d) {
 //   // console.log(JSON.stringify(nodes))  
 // });
 
-d3.json("data/force2.json", function(error, graph) {
+
+var low_thresh = -1;
+var high_thresh = 100000;
+var max_value = 0;
+
+d3.json("data/force.json", function(error, graph) {
   if (error) throw error;
   
   graph.nodes = graph.nodes.sort(function(a, b) { return d3.ascending(a.group, b.group); });
@@ -88,15 +93,23 @@ d3.json("data/force2.json", function(error, graph) {
       .links(graph.links)
       .start();
 
-  var max_value = d3.max(graph.links, function(d){ return d.value; });
+  max_value = d3.max(graph.links, function(d){ return d.value; });
 
   var link = svg.append('g').attr('class', 'links').selectAll('line')
       .data(graph.links)
     .enter().append('line')
-      .style('opacity', 0.8)
-      .style('stroke-width', function(d) { return 5 * d.value / max_value; })
-      .style('stroke-opacity', '0.6')
-      .attr('stroke', '#999');
+      // .style('opacity', 0.8)
+      .style('stroke-width', function(d) { return Math.max(5 * (d.value) / (max_value), 0); })
+      // .style('stroke-opacity', '0.6')
+      .attr('stroke', '#999')
+      .attr('value', function(d){ return d.value})
+      .on('mouseover',function(d){
+        // d3.select(this).attr('hover',1);
+        if(d.name != ''){
+          var val = d.value;
+          tooltip_in(val);
+        }
+      });
 
   var node = svg.append('g').attr('class', 'nodes').selectAll('circle')
       .data(graph.nodes)
@@ -202,4 +215,33 @@ d3.json("data/force2.json", function(error, graph) {
 
   });
 
+});
+
+
+document.getElementById("lowerButton").addEventListener('click',function(){
+  low_thresh = +document.getElementById("thresh_low_input").value;
+  svg.selectAll('line').style('stroke-width', function(d){
+    var v = +d3.select(this).attr('value');
+    if(v<low_thresh){
+      v=0;
+    }
+    if(v>high_thresh){
+      v=0;
+    }
+    return Math.max(5 * v / Math.min(max_value, high_thresh), 0);
+  })
+});
+
+document.getElementById("higherButton").addEventListener('click',function(){
+  high_thresh = +document.getElementById("thresh_high_input").value;
+  svg.selectAll('line').style('stroke-width', function(d){
+    var v = +d3.select(this).attr('value');
+    if(v<low_thresh){
+      v=0;
+    }
+    if(v>high_thresh){
+      v=0;
+    }
+    return Math.max(5 * v / Math.min(max_value, high_thresh), 0);
+  })
 });

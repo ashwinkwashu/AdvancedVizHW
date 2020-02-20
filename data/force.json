@@ -1,112 +1,148 @@
 {
 	"nodes": [{
 		"name": "",
-		"group": 1
+		"group": null,
+		"subgroup": ""
 	}, {
 		"name": "Lucas Alcazar",
-		"group": 1
+		"group": "Information Technology",
+		"subgroup": "IT Helpdesk"
 	}, {
 		"name": "Lars Azada",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Engineer"
 	}, {
 		"name": "Felix Balas",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Engineer"
 	}, {
 		"name": "Ingrid Barranco",
-		"group": 1
+		"group": "Executive",
+		"subgroup": "SVP/CFO"
 	}, {
 		"name": "Isak Baza",
-		"group": 1
+		"group": "Information Technology",
+		"subgroup": "IT Technician"
 	}, {
 		"name": "Linnea Bergen",
-		"group": 1
+		"group": "Information Technology",
+		"subgroup": "IT Group Manager"
 	}, {
 		"name": "Isande Borrasca",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Drill Technician"
 	}, {
 		"name": "Nils Calixto",
-		"group": 1
+		"group": "Information Technology",
+		"subgroup": "IT Technician"
 	}, {
 		"name": "Axel Calzas",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Drill Technician"
 	}, {
 		"name": "Ada Campo-Corrente",
-		"group": 1
+		"group": "Executive",
+		"subgroup": "SVP/CIO"
 	}, {
 		"name": "Gustav Cazar",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Hydraulic Technician"
 	}, {
 		"name": "Hideki Cocinaro",
-		"group": 1
+		"group": "Security",
+		"subgroup": "Site Control"
 	}, {
 		"name": "Inga Ferro",
-		"group": 1
+		"group": "Security",
+		"subgroup": "Site Control"
 	}, {
 		"name": "Lidelse Dedos",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Engineering Group Manager"
 	}, {
 		"name": "Loreto Bodrogi",
-		"group": 1
+		"group": "Security",
+		"subgroup": "Site Control"
 	}, {
 		"name": "Isia Vann",
-		"group": 1
+		"group": "Security",
+		"subgroup": "Perimeter Control"
 	}, {
 		"name": "Sven Flecha",
-		"group": 1
+		"group": "Information Technology",
+		"subgroup": "IT Technician"
 	}, {
 		"name": "Birgitta Frente",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Geologist"
 	}, {
 		"name": "Vira Frente",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Hydraulic Technician"
 	}, {
 		"name": "Stenig Fusil",
-		"group": 1
+		"group": "Security",
+		"subgroup": "Building Control"
 	}, {
 		"name": "Hennie Osvaldo",
-		"group": 1
+		"group": "Security",
+		"subgroup": "Perimeter Control"
 	}, {
 		"name": "Kanon Herrero",
-		"group": 1
+		"group": "Security",
+		"subgroup": "Badging Office"
 	}, {
 		"name": "Varja Lagos",
-		"group": 1
+		"group": "Security",
+		"subgroup": "Badging Office"
 	}, {
 		"name": "Minke Mies",
-		"group": 1
+		"group": "Security",
+		"subgroup": "Perimeter Control"
 	}, {
 		"name": "Adra Nubarron",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Geologist"
 	}, {
 		"name": "Marin Onda",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Drill Site Manager"
 	}, {
 		"name": "Kare Orilla",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Drill Technician"
 	}, {
 		"name": "Elsa Orilla",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Drill Technician"
 	}, {
 		"name": "Bertrand Ovan",
-		"group": 1
+		"group": "Facilities",
+		"subgroup": "Facilities Group Manager"
 	}, {
 		"name": "Felix Resumir",
-		"group": 1
+		"group": "Security",
+		"subgroup": "Security Group Manager"
 	}, {
 		"name": "Sten Sanjorge Jr.",
-		"group": 1
+		"group": "Executive",
+		"subgroup": "President/CEO"
 	}, {
 		"name": "Orhan Strum",
-		"group": 1
+		"group": "Executive",
+		"subgroup": "SVP/COO"
 	}, {
 		"name": "Brand Tempestad",
-		"group": 1
+		"group": "Engineering",
+		"subgroup": "Drill Technician"
 	}, {
 		"name": "Edvard Vann",
-		"group": 1
+		"group": "Security",
+		"subgroup": "Perimeter Control"
 	}, {
 		"name": "Willem Vasco-Pais",
-		"group": 1
+		"group": "Executive",
+		"subgroup": "Environmental Safety Advisor"
 	}],
 	"links": [{
 		"source": 1,
