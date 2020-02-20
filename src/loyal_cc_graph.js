@@ -1,4 +1,4 @@
-var width = 16000,
+var width = 14000,
     height = 9000,
     margin = 100;
 
@@ -25,7 +25,7 @@ var color = d3.scale.ordinal().domain(departments)
 
 var force = d3.layout.force()
     .charge(200)
-    .linkDistance(5000)
+    .linkDistance(3000)
     .size([width, height]);
 
 var x_scale = d3.scale.linear()
@@ -109,6 +109,7 @@ d3.json("data/force_loyal_cc.json", function(error, graph) {
   var node = svg.append('g').attr('class', 'nodes').selectAll('circle')
       .data(graph.nodes)
     .enter().append('circle')
+    .attr('id',function(d){ return 'P'+d.index})
       .attr('r', 100)
       .attr('name', function(d){ return d.name})
       .style('fill', function(d) { return color(d.group); })
@@ -129,21 +130,34 @@ d3.json("data/force_loyal_cc.json", function(error, graph) {
           var val = d.name + '<br/>' + d.group + ' - ' + d.subgroup;
           tooltip_in(val);
         }
+        var arr_neighbours=[];
         valeu =d;
         d3.selectAll('line').attr('stroke', function(d){
           if (d.source == valeu || d.target == valeu){
+            var src = d.source;
+            var tar = d.target;
+            d3.selectAll('circle').attr('r', function(d){
+              if((d == src || d == tar) && d != valeu){
+                console.log(d);
+                arr_neighbours.push('#'+d3.select(this).attr('id'));
+              }
+              return 100;
+            })
             return 'black';
           }
           else{
             return '#999';
           }
         });
+        for(var iter = 0 ; iter< arr_neighbours.length; iter++){
+          d3.select(arr_neighbours[iter]).attr('r', 150)
+        }
         d3.select(this).attr('r', 150);
       })
       .on('mouseout', function(d){
         d3.select(this).attr('hover',0)
         d3.select(this).attr('r', 100);
-        d3.selectAll('line').attr('stroke', '#999')
+        d3.selectAll('line').attr('stroke', '#999');
         return tooltip_out(d);
       });
 

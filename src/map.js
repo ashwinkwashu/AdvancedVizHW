@@ -869,6 +869,18 @@ function plot_person(id){
                     .attr('r', 6).attr('fill',color(checked_people.indexOf(data.id)))
                     .on("mouseover",function(data){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',10); return tooltip_in(names[id])})//Show the path id on hover					
                     .on("mouseout", function(d){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',2); return tooltip_out(d)});
+                svg.selectAll("#currentM".concat(id.toString())).remove();
+                svg.select("#P".concat(id.toString()))
+                    .append("image")
+                    .attr("id","currentM".concat(id.toString()))
+                    .attr("x",x-10)
+                    .attr("y",y-20)
+                    .attr("xlink:href", "../icons/marker.png")
+                    .attr('width', 20)
+                    .attr('height', 20)
+                    .on("mouseover",function(data){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',10); return tooltip_in(names[id])})//Show the path id on hover					
+                    .on("mouseout", function(d){d3.select('#Path'.concat(id.toString())).select('path').attr('stroke-width',2); return tooltip_out(d)});;
+                
             }
         // }
         // );
