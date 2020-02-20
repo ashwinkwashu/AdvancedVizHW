@@ -530,7 +530,20 @@ function plot_locations(){
             })
             //onclick print out location
             .on('click', function(d){
-                const cur_location = d.location;
+                log_all_data(d.location);
+            })
+            .on('mouseout', function(d){
+                if(!isNaN(d.long)){
+                    d3.select(this).style('opacity', 0.1);
+                    div.transition().duration(500)
+                        .style("opacity", 0);
+                }
+            });
+    });
+}
+//log cc data and loc data of selected people
+function log_all_data(d){
+    const cur_location = d;
                 // console.log(d.location);
                 d3.json('data/gps_sort_place.json')
                 .then(function (data){
@@ -539,19 +552,19 @@ function plot_locations(){
                     div.innerHTML = '';
                     //header for new place
                     let header  = document.createElement('h2');
-                    header.innerText = d.location;
+                    header.innerText = cur_location;
                     div.appendChild(header);
                     //loop through location history and output people who have visited
 
-                    for (var i=0; i< data[d.location]["history"].length;i++){
+                    for (var i=0; i< data[cur_location]["history"].length;i++){
                         let newParagraph  = document.createElement('p');
-                        var person_id = data[d.location]["history"][i].id;
+                        var person_id = data[cur_location]["history"][i].id;
                         current_person_id = parseInt(person_id)-1;
                         for(var n=0; n<checked_people.length;n++){
                             if (parseInt(current_person_id) == parseInt(checked_people[n])){
-                                ptime = Date.parse(data[d.location]["history"][i].time)
+                                ptime = Date.parse(data[cur_location]["history"][i].time)
                                 if (ptime > newstarttime && ptime < newstoptime){
-                                    newParagraph.innerText= data[d.location]["history"][i].time +" Name: "+ names[current_person_id] + " ID: " + data[d.location]["history"][i].id;
+                                    newParagraph.innerText= data[cur_location]["history"][i].time +" Name: "+ names[current_person_id] + " ID: " + data[cur_location]["history"][i].id;
                                     div.appendChild(newParagraph);
                                 }
                             }
@@ -565,7 +578,7 @@ function plot_locations(){
                     current_key  = null;
                     //some error parsing. im not sure why
                     for (const [key, value] of Object.entries(data)) {
-                        if (strip(d.location) == strip(key)){
+                        if (strip(cur_location) == strip(key)){
                             current_key= key;
 
                         }
@@ -576,7 +589,7 @@ function plot_locations(){
 
                     //header for new place
                     let header  = document.createElement('h2');
-                    header.innerText = d.location;
+                    header.innerText = cur_location;
                     cc_div.appendChild(header);
                     //loop through cc history and output people who have visited
                     console.log(checked_people);
@@ -603,36 +616,6 @@ function plot_locations(){
 
 
                 })
-                // d3.csv('data/cc_data.csv')
-                // .then(function (data){
-                //     const cc_hist = document.getElementById("credit_history");
-                //     // console.log(data);
-                //     //header for new place
-                //     //loop through location history and output people who have visited
-                //     for (var i=0; i< data.length;i++){
-                //         console.log(d.location,data[i].location);
-                //         if (data[i][] == d.location){
-                //             console.log("suc");
-                //             // let newParagraph  = document.createElement('p');
-                //             // newParagraph.innerText= data[i][0]+" Name: "+data[i][1]+ " ID: " + data[i][2];
-                //             // cc_hist.appendChild(newParagraph);
-                //             console.log(data[i]);
-
-                //         }
-                        
-
-                //     }
-
-                // })
-            })
-            .on('mouseout', function(d){
-                if(!isNaN(d.long)){
-                    d3.select(this).style('opacity', 0.1);
-                    div.transition().duration(500)
-                        .style("opacity", 0);
-                }
-            });
-    });
 }
 
 function get_radius(time){
@@ -936,4 +919,43 @@ function update_paths_static(){
 
 }
 document.getElementById("time_stamp").innerHTML = dateformat(new Date(curtime));
+//create dropdown menu for places
+function create_dropdown(){
+    //create dropdown for place
+    var parent = document.getElementById("dropdown");
+
+    //Create and append select list
+    var selectList = document.createElement("select");
+    selectList.id = "mySelect";
+    parent.appendChild(selectList);
+    var option = document.createElement("option");
+    option.value ="";
+    option.text = "Select a place";
+    selectList.appendChild(option);
+
+    d3.csv('data/locations.csv')
+        .then(function (data){
+        // Date.parse(data.time)
+            for (i=0;i<data.length;i++){
+                var option = document.createElement("option");
+                option.value = data[i].location;
+                option.text = data[i].location;
+                selectList.appendChild(option);
+            }
+    });
+
+}
+
+
+
+function sel_place(){
+    var e = document.getElementById("mySelect");
+    const location = e.options[e.selectedIndex].value;
+    log_all_data(location);
+
+}
+//create_dropdown menus
+create_dropdown();
+document.getElementById("mySelect").addEventListener("change", sel_place,false);
+
 introJs().start();
