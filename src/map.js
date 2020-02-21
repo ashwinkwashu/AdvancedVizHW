@@ -28,7 +28,7 @@ var abila = svg.append("image")
     .attr("xlink:href", "data/MC2-tourist.jpg")
     .attr("id", "abila_map")
     .attr("opacity", 0.65)
-    .attr("transform", "translate(156,85)");
+    .attr("transform", "translate(75,40)");
 
 function makesliders(){
     var time_slider = d3
@@ -405,8 +405,8 @@ ymin = 36.045015;
 xmax = 24.909965;
 ymax = 36.094918;
 
-marginx = 0.1;
-marginy = 0.1;
+marginx = 0.05;
+marginy = 0.05;
 //scaling wrt x and y. Can change that to y if needed.
 // also, is width and height x and y? Check if thats been correctly done.
 
