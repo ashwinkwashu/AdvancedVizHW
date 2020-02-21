@@ -258,6 +258,17 @@ document.getElementById("start").addEventListener("click", function(d){timestep 
 document.getElementById("stop").addEventListener("click", stop);
 document.getElementById("emp").addEventListener("click", control_nav);
 
+var help_modal = document.getElementById("helppopup");
+var help_btn = document.getElementById("help");
+var help_span = document.getElementById("helpclose");
+
+help_btn.onclick = function() {
+    help_modal.style.display = "block";
+}
+
+help_span.onclick = function() {
+    help_modal.style.display = "none";
+}
 
 //methods and variables for the tooltip
 var div = d3.select("body").append("div")	
@@ -399,6 +410,10 @@ window.onclick = function(event) {
         modal.style.display = "none";
         // start();
     }
+    if (event.target == help_modal) {
+        help_modal.style.display = "none";
+    }
+
 }
 
 //#####################################

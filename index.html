@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/introjs.min.css" integrity="sha256-/oZ7h/Jkj6AfibN/zTWrCoba0L+QhP9Tf/ZSgyZJCnY=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="container-fluid">
@@ -29,6 +30,15 @@
                 <div class="row align-items-center">
                     <div class="col-sm-2"><p id="value-time-stop" style="float:left">End Time: 05 PM</p></div>
                     <div class="col-sm"><div id="slider-time-stop"></div></div>
+                </div>
+            </div>
+        </div>
+        <div id="helppopup" class="modal">
+            <div class="modal-content">
+                <span id="helpclose" class="close">&times;</span>
+                <div class="row align-items-center">
+                    <p>hello</p>
+                </div>
                 </div>
             </div>
         </div>
@@ -50,6 +60,7 @@
                     <a href=index3.html>
                         <button id="network" ata-step="10" data-intro="Click to view network graph of credit card data" data-position='right' data-scrollTo='tooltip'>Transaction Network View</button>
                     </a>
+                    <i id = "help" class="fa fa-question-circle" style="font-size:25px"></i>
                     <p id="time_stamp" style="float:right"></p>
                 </div>
             </div>
