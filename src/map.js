@@ -254,7 +254,7 @@ function start(){
 
 };
 // event listners
-document.getElementById("start").addEventListener("click", function(d){timestep = timebasic; start();});
+document.getElementById("start").addEventListener("click", function(d){timestep = timebasic; speedratio=1; start();});
 document.getElementById("stop").addEventListener("click", stop);
 document.getElementById("emp").addEventListener("click", control_nav);
 
@@ -822,7 +822,6 @@ function plot_person(id){
     //     .then(function (dataBig){
             // console.log(id);
             loc_data = dataBig[+id];
-            console.log(id)
 
             var t;
             
