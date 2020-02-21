@@ -1030,6 +1030,8 @@ function draw_bar(data_imported){
     bar.selectAll(".bar").data(output)
         .enter().append('rect')
         .attr('class', 'bar')
+        .attr('fill', function(d){
+            return color(checked_people.indexOf(names.indexOf(d.name).toString()));})
         .attr('x', function(d) { return xScale(d.name); })
         .attr('width', xScale.bandwidth())
         .attr('y', function(d) { return yScale(+d.frequency); })
