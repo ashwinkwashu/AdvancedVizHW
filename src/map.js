@@ -248,7 +248,7 @@ function start(){
 
 };
 // event listners
-document.getElementById("start").addEventListener("click", start);
+document.getElementById("start").addEventListener("click", function(d){timestep = timebasic; start();});
 document.getElementById("stop").addEventListener("click", stop);
 document.getElementById("emp").addEventListener("click", control_nav);
 
