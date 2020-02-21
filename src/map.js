@@ -14,10 +14,15 @@ var time_end = new Date('01/06/2014 17:00');
 var svg = d3.select('#map')
     .append('svg')
     .attr('viewBox', '0 0 ' + w + ' ' + h)
+    .attr('width', '75%')
     .on('click', function(){
         coords = scale_mouse_coords(d3.mouse(this));
         console.log(coords);
     });
+var bar_svg = d3.select('#map').append('svg')
+    .attr('width', '25%')
+    .attr('viewBox', '0 0 ' + 400 + ' ' + 400)
+    .attr('width', '25%');
 
 var abila = svg.append("image")
     .attr("xlink:href", "data/MC2-tourist.jpg")
@@ -988,7 +993,7 @@ function draw_bar(data_imported){
     xScale.domain(output.map(function(d) { return d.name; }));
     yScale.domain([0, d3.max(output, function(d) { return +d.frequency; })]);
 
-    var bar = svg.append('g').attr('id','bar')
+    var bar = bar_svg.append('g').attr('id','bar').attr('transform', 'translate(' + 30 + ',' + 20 + ')');
     bar.selectAll(".bar").data(output)
         .enter().append('rect')
         .attr('class', 'bar')
