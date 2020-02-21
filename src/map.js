@@ -974,7 +974,7 @@ function update_paths_static(){
         console.log(checked_people[t])
         plot_person(checked_people[t])
     }
-
+    draw_bar(cnt_dict);
 }
 document.getElementById("time_stamp").innerHTML = dateformat(new Date(curtime));
 //create dropdown menu for places
