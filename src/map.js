@@ -982,7 +982,24 @@ function create_dropdown(){
     });
 
 }
-//TODO: BARGRAPH
+
+function compare(a, b) {
+  // help from https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
+  const locA = a.frequency;
+  const locB = b.frequency;
+
+  let comparison = 0;
+  if (locA < locB) {
+    comparison = 1;
+  } else if (locA > locB) {
+    comparison = -1;
+  }
+  return comparison;
+}
+
+
+
+
 function draw_bar(data_imported){
     var output = []
     var i = 0;
@@ -992,7 +1009,9 @@ function draw_bar(data_imported){
             i +=1;
         }
     }
-    console.log(output);
+    // var xsort = _.sortBy(output, 'frequency' );
+    // console.log(xsort);
+    output.sort(compare);
     var barwidth = 300;
     var barheight = 300;
 
@@ -1005,6 +1024,7 @@ function draw_bar(data_imported){
 
     xScale.domain(output.map(function(d) { return d.name; }));
     yScale.domain([0, d3.max(output, function(d) { return +d.frequency; })]);
+    bar_svg.selectAll(".bar").remove();
 
     var bar = bar_svg.append('g').attr('id','bar').attr('transform', 'translate(' + 30 + ',' + 20 + ')');
     bar.selectAll(".bar").data(output)
