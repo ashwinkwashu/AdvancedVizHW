@@ -63,6 +63,21 @@ function tooltip_out(d) {
       .duration(500)		
       .style("opacity", 0);
 }
+var help_modal_graph_cc = document.getElementById("helppopupgraphcc");
+var help_btn_graph_cc = document.getElementById("helpgraphcc");
+var help_span_graph_cc = document.getElementById("helpclosegraphcc");
+
+help_btn_graph_cc.onclick = function() {
+  help_modal_graph_cc.style.display = "block";
+}
+
+help_span_graph_cc.onclick = function() {
+  help_modal_graph_cc.style.display = "none";
+}
+// window.onclick = function(event) {
+//   help_modal_graph_cc.style.display = "none";
+// }
+
 
 // d3.csv('data/car-assignments.csv', function(data){
 //   for(d in data){

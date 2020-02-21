@@ -6,9 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div id="helppopupgraph" class="modal">
+        <div class="modal-content">
+            <span id="helpclosegraph" class="close">&times;</span>
+            <div class="row align-items-center">
+                <p>Welcome to the tutorial for this visualization!!<br>
+                    <b>
+                        The Task <br>
+                    </b>
+                    On 20th Jan, 2014, multiple GasTech employees were kidnapped by an organization called the Protectors of Kronos (PoK). This dashboard visualized location and credit card data from employee records over the two weeks preceding the incident.
+                    Your task is to find interesting correlations and suspicious behaviour in this data that might help with the investigation. Good luck!
+                    <b>
+                        <br>
+                        <br>
+                        MAP VIEW<br>
+                    </b>
+                    The map view provides an overview of the location data from the people employed at gastech who have a vehicle assigned.
+                    The main map area show the location of different people at various times, and contains information such as points where they stopped for more than 100 seconds.
+                    To use the interface:<br>
+                    
+                     - select some people using the "Select employees" sidebar<br>
+                     - select the timeframe for which you want to see location data using the "Customize Time Interval" button. You can ignore this if you want to see all data.<br>
+                     - do a static update using the "Static Update" or click the "Start" button to start an animation that begins at the selected starting time. (default value: 6th Jan, 6:30 am)<br>
+                     - You can also use the left and right arrow keys to control the speed of flow of time, and press "Stop" to pause.<br>
+                     - The "Clear Map" button clears all plotted data from the screen and also deselects any selected people.<br>
+                     <br>
+                     There are some other features that have been included in this view. For example, hovering over points of interest will display information about them. Selecting a location using the drop down menu will display all credit card and loyalty data of selected people within the selected time interval on the right column. It also shows a bar graph for the frequency of people who visit that place.
+                    <br>
+                    The central column shows the places people have visited using a combination of GPS data and proximity to locations.
+                    <br>
+                    <br>
+                    Apart from this, there is an option to "Update screen division", which changes the amount of screen space occupied by the map and the bar graph. Enter a number between 0 and 100, and it will change the map width accordingly.
+                    <br>
+                    When selecting people, it is important to note that not all people have location data available. All entries in the sidebar which have an undefined ID are people who fon't have GPS data, but they may have credit card and loyalty data. Try selecting a location from the drop down and include these people in your search.
+                    <br>
+                    <br>
+                    There are two other views, discussed below
+                    <br>
+                    <b>
+                        <br>
+                        NETWORK VIEW
+                        <br>
+                    </b>
+                    The network view shows a graph of GPS based correlation data. The edge weights indicate how many times people have been at the same place at the same time, excluding GASTech offices. This only includes places where they stopped for a while, and not just random intersections.
+                    The thickness of the link is representative of the number of times any two people have been together.
+                    <br>
+                    Hovering over links shows the weight associated with that link, and hovering over nodes highlights all connections to and from that node. The nodes are coloured by department, and hovering over them reveals the name of the person.
+                    <br>
+                    <br>
+                    Since the graph can get a bit crowded, we have added the option to remove some edges from the visualization to reduce clutter and focus on important information. The update threshold buttons can control the range of weights that will be displayed. Any edge with a weight outside this range will not be displayed.
+                    Further, there is an option to fix the nodes along a circle to get a more stable view.
+                    
+                    <br>
+                    <b>
+                        <br>
+                        TRANSACTION VIEW
+                        <br>
+                    </b>
+                    Much like the network view, the transaction view is also a network of data, except in this case, the edge wieghts are credit card/ loyalty transactions made within a certain time period.
+                    <br>
+                    The rest of the features are identical to Map View.
+                </p>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid">
         <div id="main">
             <div class="header">
@@ -19,6 +84,7 @@
                     <a href=index3.html>
                         <button id="network">Transaction Network View</button>
                     </a>
+                    <i id = "helpgraph" class="fa fa-question-circle" style="font-size:25px"></i>
                 </div>
             </div>
             <div id='thresh_low'>
