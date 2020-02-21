@@ -11,16 +11,19 @@ var time_start = new Date('01/06/2014 07:00');
 var time_end = new Date('01/06/2014 17:00');
 
 // on click, console will print x,y coordinates of mouse's location
+var default_split = 75;
 var svg = d3.select('#map')
     .append('svg')
+    .attr('id','map_split')
     .attr('viewBox', '0 0 ' + w + ' ' + h)
-    .attr('width', '75%')
+    .attr('width', function(d){return default_split.toString()+'%'})
     .on('click', function(){
         coords = scale_mouse_coords(d3.mouse(this));
         console.log(coords);
     });
 var bar_svg = d3.select('#map').append('svg')
-    .attr('width', '25%')
+    .attr('id','bar_split')
+    .attr('width', function(d){return (100-default_split).toString()+'%'})
     .attr('viewBox', '0 0 ' + 400 + ' ' + 400)
     .attr('width', '25%');
 
@@ -1086,3 +1089,16 @@ create_dropdown();
 document.getElementById("mySelect").addEventListener("change", sel_place,false);
 
 introJs().start();
+
+
+//for rescaling the map and graph
+
+document.getElementById("screenDivideButton").addEventListener('click',function(){
+    default_split = +document.getElementById("screen_percent").value;
+    console.log(default_split)
+    d3.select("#bar_split")
+        .attr('width', function(d){return (100-default_split).toString()+'%'});
+    d3.select("#map_split")
+        .attr('width', function(d){return default_split.toString()+'%'});
+        
+      });
