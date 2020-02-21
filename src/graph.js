@@ -77,6 +77,20 @@ function tooltip_out(d) {
 //   // console.log(JSON.stringify(nodes))  
 // });
 
+var help_modal_graph = document.getElementById("helppopupgraph");
+var help_btn_graph = document.getElementById("helpgraph");
+var help_span_graph = document.getElementById("helpclosegraph");
+
+help_btn_graph.onclick = function() {
+  help_modal_graph.style.display = "block";
+}
+
+help_span_graph.onclick = function() {
+  help_modal_graph.style.display = "none";
+}
+// window.onclick = function(event) {
+//   help_modal_graph.style.display = "none";
+// }
 
 var low_thresh = -1;
 var high_thresh = 100000;
