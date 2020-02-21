@@ -564,11 +564,10 @@ function plot_locations(){
 }
 //log cc data and loc data of selected people
 
-
+var cnt_dict = {};
 function log_all_data(d){
+    cnt_dict = {};
     const cur_location = d;
-    var cnt_dict = {};
-
                 // console.log(d.location);
                 d3.json('data/gps_sort_place.json')
                 .then(function (data){
@@ -1015,7 +1014,7 @@ function draw_bar(data_imported){
     // var xsort = _.sortBy(output, 'frequency' );
     // console.log(xsort);
     output.sort(compare);
-    var barwidth = 300;
+    var barwidth = 300*(100-default_split)/25;
     var barheight = 300;
 
     var xScale = d3.scaleBand()
@@ -1028,6 +1027,7 @@ function draw_bar(data_imported){
     xScale.domain(output.map(function(d) { return d.name; }));
     yScale.domain([0, d3.max(output, function(d) { return +d.frequency; })]);
     bar_svg.selectAll(".bar").remove();
+    bar_svg.selectAll("#scale").remove();
 
     var bar = bar_svg.append('g').attr('id','bar').attr('transform', 'translate(' + 30 + ',' + 20 + ')');
     bar.selectAll(".bar").data(output)
@@ -1098,9 +1098,12 @@ introJs().start();
 document.getElementById("screenDivideButton").addEventListener('click',function(){
     default_split = +document.getElementById("screen_percent").value;
     console.log(default_split)
+    var bar_w=400*(100-default_split)/25
     d3.select("#bar_split")
-        .attr('width', function(d){return (100-default_split).toString()+'%'});
+        .attr('width', function(d){return (100-default_split).toString()+'%'})
+        .attr('viewBox', '0 0 ' + bar_w + ' ' + 400);
     d3.select("#map_split")
         .attr('width', function(d){return default_split.toString()+'%'});
+    draw_bar(cnt_dict);
         
       });
