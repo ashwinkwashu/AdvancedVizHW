@@ -109,7 +109,10 @@ function makesliders(){
 
 //import below from json later. below is for testing
 const people_id = ['0','1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35'];
-const names = ['','Lucas Alcazar', 'Lars Azada', 'Felix Balas', 'Ingrid Barranco', 'Isak Baza', 'Linnea Bergen', 'Isande Borrasca', 'Nils Calixto', 'Axel Calzas', 'Ada Campo-Corrente', 'Gustav Cazar', 'Hideki Cocinaro', 'Inga Ferro', 'Lidelse Dedos', 'Loreto Bodrogi', 'Isia Vann', 'Sven Flecha', 'Birgitta Frente', 'Vira Frente', 'Stenig Fusil', 'Hennie Osvaldo', 'Kanon Herrero', 'Varja Lagos', 'Minke Mies', 'Adra Nubarron', 'Marin Onda', 'Kare Orilla', 'Elsa Orilla', 'Bertrand Ovan', 'Felix Resumir', 'Sten Sanjorge Jr.', 'Orhan Strum', 'Brand Tempestad', 'Edvard Vann', 'Willem Vasco-Pais'];
+// const names = ['','Lucas Alcazar', 'Lars Azada', 'Felix Balas', 'Ingrid Barranco', 'Isak Baza', 'Linnea Bergen', 'Isande Borrasca', 'Nils Calixto', 'Axel Calzas', 'Ada Campo-Corrente', 'Gustav Cazar', 'Hideki Cocinaro', 'Inga Ferro', 'Lidelse Dedos', 'Loreto Bodrogi', 'Isia Vann', 'Sven Flecha', 'Birgitta Frente', 'Vira Frente', 'Stenig Fusil', 'Hennie Osvaldo', 'Kanon Herrero', 'Varja Lagos', 'Minke Mies', 'Adra Nubarron', 'Marin Onda', 'Kare Orilla', 'Elsa Orilla', 'Bertrand Ovan', 'Felix Resumir', 'Sten Sanjorge Jr.', 'Orhan Strum', 'Brand Tempestad', 'Edvard Vann', 'Willem Vasco-Pais'];
+// const other_names = ['Mat Bramar', 'Anda Ribera', 'Rachel Pantanal', 'Linda Lagos', 'Ruscella Mies Haber', 'Carla Forluniau', 'Cornelia Lais', 'Emile Arpa', 'Varro Awelon', 'Dante Coginian', 'Albina Hafon', 'Benito Hawelon', 'Claudio Hawelon', 'Henk Mies', 'Valeria Morlun', 'Adan Morlun', 'Cecilia Morluniau', 'Irene Nant', 'Dylan Scozzese'];
+
+const names = ['','Lucas Alcazar', 'Lars Azada', 'Felix Balas', 'Ingrid Barranco', 'Isak Baza', 'Linnea Bergen', 'Isande Borrasca', 'Nils Calixto', 'Axel Calzas', 'Ada Campo-Corrente', 'Gustav Cazar', 'Hideki Cocinaro', 'Inga Ferro', 'Lidelse Dedos', 'Loreto Bodrogi', 'Isia Vann', 'Sven Flecha', 'Birgitta Frente', 'Vira Frente', 'Stenig Fusil', 'Hennie Osvaldo', 'Kanon Herrero', 'Varja Lagos', 'Minke Mies', 'Adra Nubarron', 'Marin Onda', 'Kare Orilla', 'Elsa Orilla', 'Bertrand Ovan', 'Felix Resumir', 'Sten Sanjorge Jr.', 'Orhan Strum', 'Brand Tempestad', 'Edvard Vann', 'Willem Vasco-Pais', 'Mat Bramar', 'Anda Ribera', 'Rachel Pantanal', 'Linda Lagos', 'Ruscella Mies Haber', 'Carla Forluniau', 'Cornelia Lais', 'Emile Arpa', 'Varro Awelon', 'Dante Coginian', 'Albina Hafon', 'Benito Hawelon', 'Claudio Hawelon', 'Henk Mies', 'Valeria Morlun', 'Adan Morlun', 'Cecilia Morluniau', 'Irene Nant', 'Dylan Scozzese'];
 
 var nodes = [];
 var links = []
@@ -310,7 +313,7 @@ function create_checkboxes(names){
             selectall = false;
         }
         else{
-            var checkboxes = d3.selectAll('input').property("checked",'checked');
+            var checkboxes = d3.select("#mySidebar").selectAll('input').property("checked",'checked');
             checkboxes.each(function(d, i) {
                 if (d3.select(this).attr('id') != 'selectall'){
                     if(!(checked_people.includes(d3.select(this).attr('id')))){
@@ -804,6 +807,7 @@ function plot_person(id){
     //     .then(function (dataBig){
             // console.log(id);
             loc_data = dataBig[+id];
+            console.log(id)
 
             var t;
             
