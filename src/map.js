@@ -1029,33 +1029,52 @@ function draw_bar(data_imported){
     bar_svg.selectAll(".bar").remove();
     bar_svg.selectAll("#scale").remove();
 
-    var bar = bar_svg.append('g').attr('id','bar').attr('transform', 'translate(' + 30 + ',' + 20 + ')');
+    var bar = bar_svg.append('g').attr('id','bar').attr('transform', 'translate(' + 50 + ',' + 50 + ')');
     bar.selectAll(".bar").data(output)
         .enter().append('rect')
         .attr('class', 'bar')
+        .style('opacity', 0.9)
         .attr('fill', function(d){
             return color(checked_people.indexOf(names.indexOf(d.name).toString()));})
         .attr('x', function(d) { return xScale(d.name); })
         .attr('width', xScale.bandwidth())
         .attr('y', function(d) { return yScale(+d.frequency); })
-        .attr('height', function(d) { return barheight - yScale(+d.frequency); });
+        .attr('height', function(d) { return barheight - yScale(+d.frequency); })
+        .on('mouseover', function(d){
+            d3.select(this).style('opacity', 1);
+            var val = d.name + '<br/>' + d.frequency;
+            return tooltip_in(val);
+        })
+        .on('mouseout', function(d){
+            d3.select(this).style('opacity', 0.9);
+            return tooltip_out(d);
+        });
         
     bar.append('g')
         .attr('id', 'scale')
         .attr('transform', 'translate(0,' + barheight + ')')
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale).tickValues([]))
+        .append("text").attr("transform", "translate(" + barwidth/2 + " ," + 30 + ")")
+        .style("text-anchor", "middle")
+        .attr("fill", "black") 
+        .text(function(d){
+            var e = document.getElementById("mySelect");
+            const location = e.options[e.selectedIndex].value;
+            var text = 'Vistor Frequency for ' + location + ' by CC Data';
+            return text;
+        });
   
     // add the y axis
     bar.append('g')
         .attr('id', 'scale')
         .call(d3.axisLeft(yScale))
         .append("text")
-        .attr("transform", "rotate(-90)")
+        .attr("transform", "rotate(-90) translate(-110,-50)")
         .attr("fill", "black") 
         .attr("y", 6)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("Frequency");
+        .text("Frequency Count");
 
 
     // svg.append('g').attr('id','bar');
