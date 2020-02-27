@@ -74,7 +74,7 @@ function makesliders(){
         .default(new Date("1/6/2014 17:00"))
         .on('onchange', val => {
             d3.select('p#value-time-stop').text('Time Range: '.concat(hourformat(val)));
-            time_stop = val;
+            time_end = val;
     });
 
     var gTime = d3
@@ -375,7 +375,7 @@ function clickEvent(){
 
 var modal = document.getElementById("timepopup");
 var btn = document.getElementById("custtime");
-var span = document.getElementsByClassName("close")[0];
+var time_span = document.getElementsByClassName("close")[0];
 
 btn.onclick = function() {
     stop();
@@ -383,13 +383,15 @@ btn.onclick = function() {
     modal.style.display = "block";
 }
 
-span.onclick = function() {
+time_span.onclick = function() {
     // d3.select("#People").selectAll('circle').remove();
     if (changetime){
         var time = d3.timeFormat('%H:%M');
         newstarttime = Date.parse(('1/'.concat(new Date(daterange[0]).getDate()).concat('/2014')) + ' ' + time(new Date(time_start)));
         newstoptime = Date.parse(('1/'.concat(new Date(daterange[1]).getDate()).concat('/2014')) + ' ' + time(new Date(time_end)));
         curtime = newstarttime;
+        console.log(newstarttime);
+        console.log(newstoptime);
         // console.log(('1/'.concat(new Date(daterange[0]).getDate()).concat('/2014')) + ' ' + time(new Date(time_start)) + ' to ' + ('1/'.concat(new Date(daterange[1]).getDate()).concat('/2014')) + ' ' + time(new Date(time_end)));
     }
     modal.style.display = "none";
