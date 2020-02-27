@@ -92,8 +92,8 @@ var low_thresh = -1;
 var high_thresh = 100000;
 var max_value = 0;
 
-
 d3.json("data/force_loyal_cc.json", function(error, graph) {
+// d3.json("data/force_cc.json", function(error, graph) {
   if (error) throw error;
   graph.nodes = graph.nodes.sort(function(a, b) { return d3.ascending(a.group, b.group); });
   n_elements = graph.nodes.length;
