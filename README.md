@@ -2,6 +2,8 @@
 
 This is the repository for the second assignment for CSE 557A at Washington Universtiy in St. Louis. 
 
+Running example at https://ashwinkwashu.github.io/AdvancedVizHW
+
 ## Background 
 
 *Note: This scenario and all the people, places, groups, technologies, contained therein are fictitious. Any resemblance to real people, places, groups, or technologies is purely coincidental.*
